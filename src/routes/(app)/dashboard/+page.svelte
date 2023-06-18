@@ -5,12 +5,12 @@
 	$: ({ testTable, user } = data);
 </script>
 
-<div class="block">
-	<p>Protected content for {user.email}</p>
-	<p>server-side fetched data with RLS:</p>
-	<pre>{JSON.stringify(testTable, null, 2)}</pre>
+<div class="mb-6">
+    <p>Protected content for {user.email}</p>
+    <p>server-side fetched data with RLS:</p>
+    <pre>{JSON.stringify(testTable, null, 2)}</pre>
 </div>
-<div class="block">
-	<p>user:</p>
-	<pre>{JSON.stringify(user, null, 2)}</pre>
+<div class="mb-6">
+    <p>user:</p>
+    <pre class="language-js"><code class="language-js">{JSON.stringify(user, null, 2)}</code></pre>
 </div>
