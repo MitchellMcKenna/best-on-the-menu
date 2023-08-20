@@ -31,6 +31,7 @@ CREATE TABLE "Business" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "name" TEXT NOT NULL,
+    "slug" TEXT NOT NULL,
     "location" geometry(Point, 4326) NOT NULL,
     "amenity" TEXT,
     "cuisine" TEXT,
@@ -48,6 +49,9 @@ CREATE TABLE "Business" (
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Business_slug_key" ON "Business"("slug");
 
 -- CreateIndex
 CREATE INDEX "location_idx" ON "Business" USING GIST ("location");
