@@ -19,13 +19,13 @@
 </script>
 
 <svelte:head>
-	<title>Email and Password Demo - Supabase Auth Helpers</title>
+	<title>Best On The Menu</title>
 </svelte:head>
 
 <main class="container is-max-desktop">
 	<div class="navbar bg-base-100">
 		<div class="flex-1">
-			<a class="btn btn-ghost normal-case text-xl">Supabase Auth Helpers Demo</a>
+			<a class="btn btn-ghost normal-case text-xl">Best On The Menu</a>
 		</div>
 		<div class="flex-none">
 			<ul class="menu menu-horizontal px-1">

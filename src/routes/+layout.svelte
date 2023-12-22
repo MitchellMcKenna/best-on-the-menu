@@ -21,7 +21,7 @@
 </script>
 
 <svelte:head>
-    <title>Supabase Auth Helpers Demo</title>
+    <title>Best on the Menu</title>
 </svelte:head>
 
 <slot />
