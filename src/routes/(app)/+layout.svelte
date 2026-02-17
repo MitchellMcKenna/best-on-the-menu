@@ -1,9 +1,13 @@
 <script lang="ts">
-	import { applyAction, enhance, type SubmitFunction } from '$app/forms';
+	import { applyAction, enhance } from '$app/forms';
+	import type { SubmitFunction } from '@sveltejs/kit';
 	import { invalidate } from '$app/navigation';
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
+	import type { Snippet } from 'svelte';
 
-	let loading = false;
+	let { children }: { children: Snippet } = $props();
+
+	let loading = $state(false);
 
 	const handleLogout: SubmitFunction = () => {
 		loading = true;
@@ -33,7 +37,14 @@
 				<li tabindex="0">
 					<a>
 						Parent
-						<svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"/></svg>
+						<svg
+							class="fill-current"
+							xmlns="http://www.w3.org/2000/svg"
+							width="20"
+							height="20"
+							viewBox="0 0 24 24"
+							><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg
+						>
 					</a>
 					<ul class="p-2 bg-base-100">
 						<li><a>Submenu 1</a></li>
@@ -41,7 +52,7 @@
 					</ul>
 				</li>
 				<li>
-					{#if $page.data.session}
+					{#if page.data.session}
 						<form action="/logout" method="post" use:enhance={handleLogout}>
 							<button disabled={loading} type="submit">Sign out</button>
 						</form>
@@ -51,5 +62,5 @@
 		</div>
 	</div>
 
-	<slot />
+	{@render children()}
 </main>

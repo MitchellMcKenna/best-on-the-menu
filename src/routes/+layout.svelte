@@ -1,27 +1,27 @@
-<!-- src/routes/+layout.svelte -->
 <script lang="ts">
-    import '../app.postcss';
-    import { invalidate } from '$app/navigation';
-    import { onMount } from 'svelte';
-    import type { LayoutData } from './$types';
+	import '../app.css';
+	import { invalidate } from '$app/navigation';
+	import { onMount } from 'svelte';
+	import type { Snippet } from 'svelte';
+	import type { LayoutData } from './$types';
 
-    export let data: LayoutData;
+	let { data, children }: { data: LayoutData; children: Snippet } = $props();
 
-    $: ({ supabase } = data);
+	let supabase = $derived(data.supabase);
 
-    onMount(() => {
-        const {
-            data: { subscription }
-        } = supabase.auth.onAuthStateChange(() => {
-            invalidate('supabase:auth');
-        });
+	onMount(() => {
+		const {
+			data: { subscription }
+		} = supabase.auth.onAuthStateChange(() => {
+			invalidate('supabase:auth');
+		});
 
-        return () => subscription.unsubscribe();
-    });
+		return () => subscription.unsubscribe();
+	});
 </script>
 
 <svelte:head>
-    <title>Best on the Menu</title>
+	<title>Best on the Menu</title>
 </svelte:head>
 
-<slot />
+{@render children()}

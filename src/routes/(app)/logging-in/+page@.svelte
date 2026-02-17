@@ -1,25 +1,22 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
 	import { goto } from '$app/navigation';
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 
-	$: {
-		const redirectTo = $page.url.searchParams.get('redirect');
+	$effect(() => {
+		const redirectTo = page.url.searchParams.get('redirect');
 
-		// check if user has been set in session store then redirect
-		if (browser && $page.data.session) {
+		if (browser && page.data.session) {
 			goto(redirectTo ?? '/dashboard');
 		}
-	}
+	});
 </script>
 
 <section class="hero is-fullheight">
-	<!-- Hero head: will stick at the top -->
 	<div class="hero-head">
-		<progress class="progress is-small is-info" max="100" />
+		<progress class="progress is-small is-info" max="100"></progress>
 	</div>
 
-	<!-- Hero content: will be in the middle -->
 	<div class="hero-body">
 		<div class="container has-text-centered">
 			<em class="subtitle">

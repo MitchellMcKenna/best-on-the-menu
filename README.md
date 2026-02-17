@@ -4,17 +4,18 @@ Find the must-try menu items for the restaurant you're at!
 
 ## Built With
 
-* [![Svelte][Svelte-img]][Svelte-url]
-* [![NodeJS][Nodejs-img]][Nodejs-url]
-* [![TypeScript][Typescript-img]][Typescript-url]
-* [![Supabase][Supabase-img]][Supabase-url]
-* [![Postgres][Postgres-img]][Postgres-url]
-* [![Prisma][Prisma-img]][Prisma-url]
-* [![Tailwind][Tailwind-img]][Tailwind-url]
-* [![Vite][Vite-img]][Vite-url]
-* [![DaisyUI][DaisyUI-img]][DaisyUI-url]
+- [![Svelte][Svelte-img]][Svelte-url]
+- [![NodeJS][Nodejs-img]][Nodejs-url]
+- [![TypeScript][Typescript-img]][Typescript-url]
+- [![Supabase][Supabase-img]][Supabase-url]
+- [![Postgres][Postgres-img]][Postgres-url]
+- [![Prisma][Prisma-img]][Prisma-url]
+- [![Tailwind][Tailwind-img]][Tailwind-url]
+- [![Vite][Vite-img]][Vite-url]
+- [![DaisyUI][DaisyUI-img]][DaisyUI-url]
 
 ## Prerequisites
+
 - [node >=14](https://nodejs.org/en/download)
 - [pnpm](https://pnpm.io/installation)
 
@@ -25,11 +26,13 @@ pnpm install
 ```
 
 Setup environment variables (and update with your Supabase settings):
+
 ```
 cp .env.example .env
 ```
 
 Migrate the database:
+
 ```
 npx prisma migrate dev
 ```
@@ -61,9 +64,10 @@ You can preview the production build with `npm run preview`.
 > To deploy, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
 
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
 [Svelte-url]: https://kit.svelte.dev/
 [Svelte-img]: https://img.shields.io/badge/Svelte-4A4A55?style=for-the-badge&logo=svelte&logoColor=FF3E00
-[Supabase-url]: https://supabase.com/ 
+[Supabase-url]: https://supabase.com/
 [Supabase-img]: https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white
 [Nodejs-url]: https://nodejs.org/en
 [Nodejs-img]: https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white
