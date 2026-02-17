@@ -1,11 +1,10 @@
 import type { PageLoad } from './$types';
-// import { createOSMStream } from 'osm-pbf-parser-node';
 import { redirect } from '@sveltejs/kit';
 
 export const load: PageLoad = async ({ parent }) => {
-	const { session, supabase } = await parent();
+	const { session } = await parent();
 	if (!session) {
-		throw redirect(303, '/');
+		redirect(303, '/');
 	}
 
 	// TODO:: Move this to another function, not page load.

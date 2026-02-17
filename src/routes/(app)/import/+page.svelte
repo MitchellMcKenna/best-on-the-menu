@@ -1,10 +1,10 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	export let data: PageData;
-	$: ({ user } = data);
 
+	let { data }: { data: PageData } = $props();
+	let user = $derived(data.user);
 </script>
 
 <div class="grid h-screen place-items-center">
-    <button class="btn btn-primary">import restaurants.pbf</button>
+	<button class="btn btn-primary">import restaurants.pbf</button>
 </div>

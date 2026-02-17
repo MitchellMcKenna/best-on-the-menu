@@ -9,5 +9,5 @@ export const load = (async ({ params }) => {
     return { business: business };
   }
 
-  throw error(404, 'Not found');
+  error(404, 'Not found');
 }) satisfies PageServerLoad;

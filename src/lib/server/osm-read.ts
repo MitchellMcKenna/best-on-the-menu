@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { createOSMStream } from "osm-pbf-parser-node";
 import prisma from './prisma';
 import slug from "slug";

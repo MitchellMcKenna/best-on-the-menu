@@ -1,7 +1,7 @@
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import prisma from '$lib/server/prisma';
-import { Business, Prisma } from "@prisma/client";
+import { type Business, Prisma } from "@prisma/client";
 
 export const load = (async ({ params }) => {
   // TODO:: DO search based on lat/long from businesses
@@ -33,5 +33,5 @@ export const load = (async ({ params }) => {
   //   return { business: business };
   // }
 
-  throw error(404, 'Not found');
+  error(404, 'Not found');
 }) satisfies PageServerLoad;
