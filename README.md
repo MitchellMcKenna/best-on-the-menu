@@ -16,8 +16,9 @@ Find the must-try menu items for the restaurant you're at!
 
 ## Prerequisites
 
-- [node >=14](https://nodejs.org/en/download)
+- [node >=22](https://nodejs.org/en/download)
 - [pnpm](https://pnpm.io/installation)
+- [Supabase](https://supabase.com/) project
 
 ## Install
 
@@ -31,10 +32,22 @@ Setup environment variables (and update with your Supabase settings):
 cp .env.example .env
 ```
 
+### Database Setup
+
+Before running migrations, enable PostGIS and configure the search path in the Supabase SQL editor:
+
+```sql
+-- Supabase installs postgis in the "extensions" schema by default.
+-- This makes the geometry type visible without schema-qualifying it.
+ALTER ROLE postgres SET search_path TO public, extensions, geo;
+```
+
+Then enable the **PostGIS** extension from the Supabase dashboard (Database > Extensions).
+
 Migrate the database:
 
 ```
-npx prisma migrate dev
+npx prisma db push
 ```
 
 ## Develop

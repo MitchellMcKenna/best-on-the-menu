@@ -1,4 +1,6 @@
--- CreateExtension
+-- PostGIS: Supabase installs postgis in the "extensions" schema by default.
+-- This ensures the geometry type is visible without schema-qualifying it.
+ALTER ROLE postgres SET search_path TO public, extensions, geo;
 CREATE SCHEMA IF NOT EXISTS "geo";
 CREATE EXTENSION IF NOT EXISTS "postgis" WITH SCHEMA "geo";
 
