@@ -4,6 +4,7 @@
 	import { invalidate } from '$app/navigation';
 	import { page } from '$app/state';
 	import type { Snippet } from 'svelte';
+	import { AMENITIES } from '$lib/amenities';
 
 	let { children }: { children: Snippet } = $props();
 
@@ -33,18 +34,10 @@
 		</div>
 		<div class="flex-none">
 			<ul class="menu menu-horizontal px-1">
-				<li><a href="/businesses">Businesses</a></li>
-				<li>
-					<details>
-						<summary>
-							Parent
-						</summary>
-						<ul class="p-2 bg-base-100">
-							<li><a href="/">Submenu 1</a></li>
-							<li><a href="/">Submenu 2</a></li>
-						</ul>
-					</details>
-				</li>
+				<li><a href="/businesses">All</a></li>
+				{#each Object.entries(AMENITIES) as [slug, { label }]}
+					<li><a href="/{slug}">{label}</a></li>
+				{/each}
 				<li>
 					{#if page.data.session}
 						<form action="/logout" method="post" use:enhance={handleLogout}>

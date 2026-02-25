@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { PageData } from './$types';
+	import { AMENITY_TO_SLUG } from '$lib/amenities';
 
 	let { data }: { data: PageData } = $props();
 	let businesses = $derived(data.businesses ?? []);
@@ -27,7 +28,7 @@
 			<tbody>
 				{#each businesses as biz}
 					<tr>
-						<td><a href="/businesses/{biz.slug}" class="link">{biz.name}</a></td>
+						<td><a href="/{biz.amenity ? AMENITY_TO_SLUG[biz.amenity] ?? 'businesses' : 'businesses'}/{biz.slug}" class="link">{biz.name}</a></td>
 						<td>{biz.cuisine ?? '—'}</td>
 						<td>
 							{[biz.streetNumber, biz.street].filter(Boolean).join(' ')}

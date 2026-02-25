@@ -3,24 +3,21 @@
 
 	let { data }: { data: PageData } = $props();
 	let business = $derived(data.business);
+	let amenityLabel = $derived(data.amenityLabel);
+	let amenitySlug = $derived(data.amenitySlug);
 </script>
 
 <div class="mb-4">
-	<a href="/businesses" class="btn btn-ghost btn-sm">&larr; All Businesses</a>
+	<a href="/{amenitySlug}" class="btn btn-ghost btn-sm">&larr; All {amenityLabel}</a>
 </div>
 
 <div class="card bg-base-200 shadow-sm max-w-2xl">
 	<div class="card-body">
 		<h1 class="card-title text-2xl">{business.name}</h1>
 
-		{#if business.cuisine || business.amenity}
+		{#if business.cuisine}
 			<div class="flex flex-wrap gap-1">
-				{#if business.amenity}
-					<span class="badge badge-outline">{business.amenity}</span>
-				{/if}
-				{#if business.cuisine}
-					<span class="badge badge-primary badge-outline">{business.cuisine}</span>
-				{/if}
+				<span class="badge badge-primary badge-outline">{business.cuisine}</span>
 			</div>
 		{/if}
 
@@ -55,11 +52,6 @@
 			{#if business.cuisine}
 				<dt class="font-semibold">Cuisine</dt>
 				<dd>{business.cuisine}</dd>
-			{/if}
-
-			{#if business.amenity}
-				<dt class="font-semibold">Type</dt>
-				<dd>{business.amenity}</dd>
 			{/if}
 		</dl>
 	</div>
