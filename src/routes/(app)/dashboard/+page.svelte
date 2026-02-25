@@ -2,16 +2,49 @@
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
-	let testTable = $derived(data.testTable);
+	let businesses = $derived(data.businesses ?? []);
 	let user = $derived(data.user);
 </script>
 
 <div class="mb-6">
-	<p>Protected content for {user.email}</p>
-	<p>server-side fetched data with RLS:</p>
-	<pre>{JSON.stringify(testTable, null, 2)}</pre>
+	<p>Logged in as {user?.email}</p>
+	<p>Nearby restaurants ({businesses.length}):</p>
 </div>
-<div class="mb-6">
-	<p>user:</p>
-	<pre class="language-js"><code class="language-js">{JSON.stringify(user, null, 2)}</code></pre>
-</div>
+
+{#if businesses.length === 0}
+	<p>No restaurants found nearby.</p>
+{:else}
+	<div class="overflow-x-auto">
+		<table class="table table-zebra w-full">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Cuisine</th>
+					<th>Address</th>
+					<th>Website</th>
+				</tr>
+			</thead>
+			<tbody>
+				{#each businesses as biz}
+					<tr>
+						<td><a href="/businesses/{biz.slug}" class="link">{biz.name}</a></td>
+						<td>{biz.cuisine ?? '—'}</td>
+						<td>
+							{[biz.streetNumber, biz.street].filter(Boolean).join(' ')}
+							{#if biz.city}, {biz.city}{/if}
+							{#if biz.state} {biz.state}{/if}
+							{#if biz.postcode} {biz.postcode}{/if}
+						</td>
+						<td>
+							{#if biz.website}
+								<a href={biz.website} target="_blank" rel="noopener" class="link">Visit</a>
+							{:else}
+								—
+							{/if}
+						</td>
+					</tr>
+				{/each}
+			</tbody>
+		</table>
+	</div>
+{/if}

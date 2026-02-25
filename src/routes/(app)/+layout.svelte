@@ -33,7 +33,7 @@
 		</div>
 		<div class="flex-none">
 			<ul class="menu menu-horizontal px-1">
-				<li><a href="/">Item 1</a></li>
+				<li><a href="/businesses">Businesses</a></li>
 				<li>
 					<details>
 						<summary>

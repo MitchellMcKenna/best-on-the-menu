@@ -1,37 +1,31 @@
-import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import prisma from '$lib/server/prisma';
-import { type Business, Prisma } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 
-export const load = (async ({ params }) => {
-  // TODO:: DO search based on lat/long from businesses
-  // TODO:: Replace this boilerplate for a single business with multiple businesses found.
-
-  // @ts-ignore
-  const fields = prisma.business.fields;
-
-  const fieldNames = Object.keys(fields);
-
-  const fieldNamesList = fieldNames.join("', '");
-  //const fieldNamesList = 'id, slug, name';
-
-  console.log(fieldNamesList);
-
-  //const business = await prisma.business.findFirst({ where: { slug: params.slug }});
-  const businesses = await prisma.$queryRaw<Business[]>(
-    Prisma.sql`SELECT '${fieldNamesList}'
+export const load = (async () => {
+  // TODO:: search based on user's actual lat/long
+  const businesses = await prisma.$queryRaw<{
+    id: number;
+    name: string;
+    slug: string;
+    amenity: string | null;
+    cuisine: string | null;
+    website: string | null;
+    streetNumber: string | null;
+    street: string | null;
+    city: string | null;
+    state: string | null;
+    postcode: string | null;
+    country: string | null;
+    hours: string | null;
+  }[]>(
+    Prisma.sql`SELECT id, name, slug, amenity, cuisine, website,
+        "streetNumber", street, city, state, postcode, country, hours
         FROM "public"."Business"
-        WHERE ST_DWithin( "Business".location, ST_MakePoint(-121.155967,38.7593143)::geography, 6000 )
-        `
+        WHERE ST_DWithin(location::geography, ST_MakePoint(-121.155967, 38.7593143)::geography, 6000)
+        ORDER BY name
+        LIMIT 50`
   );
 
-  console.log(JSON.stringify(businesses));
-
-  return {};
-
-  // if (business) {
-  //   return { business: business };
-  // }
-
-  error(404, 'Not found');
+  return { businesses };
 }) satisfies PageServerLoad;
