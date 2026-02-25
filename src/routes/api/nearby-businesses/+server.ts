@@ -1,15 +1,15 @@
-import type { PageServerLoad } from './$types';
+import { json } from '@sveltejs/kit';
+import type { RequestHandler } from './$types';
 import prisma from '$lib/server/prisma';
 import { Prisma } from '@prisma/client';
 
-export const load = (async ({ url }) => {
+export const GET: RequestHandler = async ({ url }) => {
 	const lat = parseFloat(url.searchParams.get('lat') ?? '');
 	const lng = parseFloat(url.searchParams.get('lng') ?? '');
 	const find = url.searchParams.get('find')?.trim() || '';
-	const near = url.searchParams.get('near') || '';
 
 	if (isNaN(lat) || isNaN(lng)) {
-		return { businesses: [], nearQuery: near, findQuery: find, hasLocation: false };
+		return json({ error: 'Missing or invalid lat/lng parameters' }, { status: 400 });
 	}
 
 	const pattern = find ? `%${find}%` : '';
@@ -69,5 +69,5 @@ export const load = (async ({ url }) => {
 				LIMIT 50`
 			);
 
-	return { businesses, nearQuery: near, findQuery: find, hasLocation: true };
-}) satisfies PageServerLoad;
+	return json({ businesses });
+};

@@ -21,6 +21,16 @@
 			loading = false;
 		};
 	};
+
+	let locationParams = $derived.by(() => {
+		const lat = page.url.searchParams.get('lat');
+		const lng = page.url.searchParams.get('lng');
+		const near = page.url.searchParams.get('near');
+		if (!lat || !lng) return '';
+		let qs = `?lat=${encodeURIComponent(lat)}&lng=${encodeURIComponent(lng)}`;
+		if (near) qs += `&near=${encodeURIComponent(near)}`;
+		return qs;
+	});
 </script>
 
 <svelte:head>
@@ -34,9 +44,9 @@
 		</div>
 		<div class="flex-none">
 			<ul class="menu menu-horizontal px-1">
-				<li><a href="/businesses">All</a></li>
-				{#each Object.entries(AMENITIES) as [slug, { label }]}
-					<li><a href="/{slug}">{label}</a></li>
+				<li><a href="/businesses{locationParams}">All</a></li>
+				{#each Object.entries(AMENITIES) as [slug, { label }] (slug)}
+					<li><a href="/{slug}{locationParams}">{label}</a></li>
 				{/each}
 				<li>
 					{#if page.data.session}
