@@ -29,8 +29,10 @@
 				<dd>
 					{[business.streetNumber, business.street].filter(Boolean).join(' ')}
 					{#if business.city}, {business.city}{/if}
-					{#if business.state} {business.state}{/if}
-					{#if business.postcode} {business.postcode}{/if}
+					{#if business.state}
+						{business.state}{/if}
+					{#if business.postcode}
+						{business.postcode}{/if}
 					{#if business.country}, {business.country}{/if}
 				</dd>
 			{/if}
